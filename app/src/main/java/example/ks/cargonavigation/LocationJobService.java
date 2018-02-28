@@ -21,27 +21,14 @@ import com.google.android.gms.location.LocationServices;
 
 public class LocationJobService extends JobService implements GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
+    private final String server = "http://139.59.93.235:5000/loc";
     private RequestQueue reQueue;
-    private final String url="http://139.59.93.235:5000/loc";
 
     @Override
     public boolean onStartJob(JobParameters job) {
         Log.d("Job Dispatcher", "Job Started");
         reQueue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.GET,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Volley", "Network Error!");
-                    }
-                });
         return false;
     }
 
@@ -53,7 +40,26 @@ public class LocationJobService extends JobService implements GoogleApiClient.Co
 
     @Override
     public void onLocationChanged(Location location){
-
+        String url = server + "?Lat=" + location.getLatitude() + "&Long=" + location.getLongitude() + "&Status=Normal";
+        StringRequest request = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("Volley", "Location Sent");
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Volley", "Network Error!");
+                    }
+                });
+        try {
+            reQueue.add(request);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
