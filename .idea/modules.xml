@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CargoNavigation.iml" filepath="$PROJECT_DIR$/CargoNavigation.iml" />
+      <module fileurl="file://Z:\projects\Android\CargoNavigator\CargoNavigation.iml" filepath="Z:\projects\Android\CargoNavigator\CargoNavigation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CargoNavigator.iml" filepath="$PROJECT_DIR$/CargoNavigator.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
